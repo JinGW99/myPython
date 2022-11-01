@@ -38,7 +38,7 @@ stopwords = set(STOPWORDS)
 # stopwords.add("분석")
 # stopwords.add("소프트웨어")
 
-myImg = np.array(Image.open("img/kakao.jpg"))
+myImg = np.array(Image.open("img/elsa.jpg"))
 
 # 워드 클라우드를 생성하며, 생성된 워드 클라우드를 myWC 이름의 변수에 저장하기
 # 워드 클라우드를 표시하는 단어가 한글일 경우, 파이썬에서 인식 불능 현상이 발생할 수 있기 때문에 글꼴을 강제 설정함
