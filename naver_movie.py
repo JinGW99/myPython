@@ -67,7 +67,7 @@ print(train_data.isnull().sum())
 
 # 널(Null)값 제거
 train_data = train_data.dropna(how = 'any')
-print("한글 외 단어 및 널(Null)값이 제거된 최종 학습용 데이터 수 :", len(train_data))
+print("한글 외 단어 및 널(Null)값이 제거된 최종 학습용 데이터 수 : ", len(train_data))
 
 ###############################################################
 # 테스트용 데이터 정제 시작
@@ -79,14 +79,14 @@ print("중복 제거된 테스트용 데이터 수 확인 : ", test_data["docume
 # document의 리뷰 중복인 내용이 있다면 중복 제거
 test_data.drop_duplicates(subset=["document"], inplace=True)
 
-print("중복 제거된 최종 테스트용용 데이터 수 : ", len(test_data))
+print("중복 제거된 최종 테스트용 데이터 수 : ", len(test_data))
 
 #train_data['label'].value_counts().plot(kind = 'bar')
 
 # 라벨 값들의 리뷰의 수 확인
 print(test_data.groupby("label").size().reset_index(name = "count"))
 
-# 널(Null)값이 존재하는 테스트용 데이터 확인
+# 널(Null)값이 존재하는 학습용 데이터 확인
 print("널(Null)값이 존재하는 테스트용 데이터 확인 : ", test_data.isnull().values.any())
 
 print("널(Null)값이 존재하는 테스트용 데이터 수")
@@ -115,7 +115,7 @@ print(test_data.isnull().sum())
 
 # 널(Null)값 제거
 test_data = test_data.dropna(how = 'any')
-print("한글 외 단어 및 널(Null)값이 제거된 최종 테스트용 데이터 수 :", len(test_data))
+print("한글 외 단어 및 널(Null)값이 제거된 최종 테스트용 데이터 수 : ", len(test_data))
 
 # 임시로 만든 불용어 사전
 stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
@@ -137,7 +137,7 @@ for sentence in tqdm(test_data['document']):
     stopwords_removed_sentence = [word for word in tokenized_sentence if not word in stopwords] # 불용어 제거
     X_test.append(stopwords_removed_sentence)
 
-# 토큰에 학습용 단어 저장하기
+# 토근에 학습용 단어 저장하기
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts(X_train)
 
@@ -181,7 +181,7 @@ X_train = tokenizer.texts_to_sequences(X_train)
 X_test = tokenizer.texts_to_sequences(X_test)
 
 # 단어별 인덱스를 파일로 저장
-with open("model/naver_movie_tokenizer.pickle", "wb") as handle:
+with open("model/tokenizer.pickle", "wb") as handle:
     pickle.dump(tokenizer, handle)
 
 y_train = np.array(train_data["label"])
